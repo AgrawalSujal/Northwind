@@ -5,11 +5,11 @@ import { clerkMiddleware } from "@clerk/express";
 
 import fs from "node:fs";
 import path from "node:path";
-import { getEnv } from './lib/env';
-import { clerkWebhookHandler } from './webhooks/clerk';
-import { meRouter } from './routes/meRouter';
-import { productRouter } from './routes/productRouter';
-import keepCronAlive from './lib/cron';
+import { getEnv } from './lib/env.js';
+import { clerkWebhookHandler } from './webhooks/clerk.js';
+import { meRouter } from './routes/meRouter.js';
+import { productRouter } from './routes/productRouter.js';
+import keepCronAlive from './lib/cron.js';
 
 const env = getEnv();
 const app = express();
@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(cors());
 app.use(clerkMiddleware());
 
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
     res.json({ status: 'ok' });
 });
 app.use("/api/me", meRouter);
